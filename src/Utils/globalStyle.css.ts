@@ -1,8 +1,5 @@
 import {StyleSheet} from 'aphrodite';
 
-// THEME IMPORT
-import * as theme from './theme';
-
 const styles = StyleSheet.create({
     rowContainer: {
         display: 'flex',

@@ -1,9 +1,9 @@
 export type TradeCard = {
     name: string;
     type: string;
-    leverage: number;
+    leverage: string;
     outcome_time: Date;
-    total_commitment_funds: number;
+    total_commitment_funds: string;
     total_commits: number;
     ticker_name: string;
 };

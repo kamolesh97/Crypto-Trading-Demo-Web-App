@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as theme from './Utils/theme';
 
 // PAGE IMPORT
-import Home from './Pages/Home/Home';
+import Home from './Pages/Home';
 
 // DOTENV CONFIG
 require('dotenv').config();
@@ -13,6 +13,7 @@ require('dotenv').config();
 function App() {
     useEffect(() => {
         document.body.style.backgroundColor = theme.colors.background.dark;
+        document.body.style.overflow = 'hidden';
     }, []);
 
     return (

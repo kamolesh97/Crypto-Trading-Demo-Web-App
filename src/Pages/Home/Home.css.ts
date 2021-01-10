@@ -9,7 +9,10 @@ const styles = StyleSheet.create({
     },
     rightContainer: {
         flex: 1,
-        padding: '0 2.5rem',
+        padding: '0 2.5rem 5rem 2.5rem',
+        marginRight: '-20px',
+        // overflowX: 'hidden',
+        overflowY: 'scroll',
     },
     toolbarContainer: {
         width: '100%',

@@ -2,18 +2,18 @@ import React, {useState} from 'react';
 import {StyleSheet, css} from 'aphrodite';
 
 // THEME IMPORT
-import * as theme from '../Utils/theme';
+import * as theme from '../../Utils/theme';
 
 // GLOBAL STYLE IMPORT
-import globalStyles from '../Utils/globalStyle.css';
+import globalStyles from '../../Utils/globalStyle.css';
 
 // HELPER IMPORT
-import * as helper from '../Utils/helper';
+import * as helper from '../../Utils/helper';
 
 // COMPONENTS IMPORT
-import CustomIcon from './CustomIcon';
-import CustomToggle from './CustomToggle';
-import CustomButton from './CustomButton';
+import CustomIcon from './../CustomIcon';
+import CustomToggle from './../CustomToggle';
+import CustomButton from './../CustomButton';
 
 // PROPS TYPE DEF
 interface HeaderProps {}
@@ -92,7 +92,16 @@ const Header: React.FC<HeaderProps> = (): JSX.Element => {
             {/* SECTION 1 */}
             <div className={css(globalStyles.rowContainer, globalStyles.alignItemsCenter)}>
                 <CustomIcon type={'logo'} />
-                <CustomToggle data={[{label: 'Training Mode'}, {label: 'Live Mode'}]} selectedIndex={0} className={'ml-4'} />
+                <CustomToggle
+                    data={[{label: 'Training Mode'}, {label: 'Live Mode'}]}
+                    selectedIndex={0}
+                    className={'ml-4'}
+                    contentContainterStyle={styles.toggleContainer}
+                    selectedContainerStyle={styles.selectedContainerStyle}
+                    selectedLabelStyle={styles.selectedLabelStyle}
+                    nonSelectedContainerStyle={styles.nonSelectedContainerStyle}
+                    nonSelectedLabelStyle={styles.nonSelectedLabelStyle}
+                />
             </div>
 
             {/* SECTION 2 */}
@@ -147,6 +156,21 @@ const styles = StyleSheet.create({
     header: {
         padding: '1rem 1.5rem',
         borderBottom: `3px ${theme.colors.ui.green} solid`,
+    },
+    toggleContainer: {
+        width: '120px',
+    },
+    selectedContainerStyle: {
+        backgroundColor: 'white',
+    },
+    selectedLabelStyle: {
+        color: 'black',
+    },
+    nonSelectedContainerStyle: {
+        borderColor: 'white',
+    },
+    nonSelectedLabelStyle: {
+        color: 'white',
     },
     solidButton: {
         backgroundColor: 'white',

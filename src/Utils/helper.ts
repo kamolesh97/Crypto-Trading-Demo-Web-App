@@ -41,7 +41,7 @@ const numberWithCommas = (x: string): string => {
 const arrAllValChecker = (arr: boolean[], toCheck: boolean): boolean => arr.every((v: boolean): boolean => v === toCheck);
 
 const getApiUrl = (): string => {
-    if (REACT_APP_ENVIRONMENT == 'production') {
+    if (REACT_APP_ENVIRONMENT === 'production') {
         return REACT_APP_PROD_API_URL || '';
     } else {
         return REACT_APP_DEV_API_URL || '';

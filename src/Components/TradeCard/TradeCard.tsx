@@ -1,21 +1,21 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StyleSheet, css} from 'aphrodite';
 
 // THEME IMPORT
-import * as theme from '../Utils/theme';
+import * as theme from '../../Utils/theme';
 
 // GLOBAL STYLE IMPORT
-import globalStyles from '../Utils/globalStyle.css';
+import globalStyles from '../../Utils/globalStyle.css';
 
 // HELPER IMPORT
-import * as helper from '../Utils/helper';
+import * as helper from '../../Utils/helper';
 
 // COMPONENTS IMPORT
-import CustomIcon from './CustomIcon';
-import CustomChart from './CustomChart';
+import CustomIcon from './../CustomIcon';
+import CustomChart from './../CustomChart';
 
 // TS TYPES IMPORT
-import * as types from '../Constants/types';
+import * as types from '../../Constants/types';
 
 // PROP TYPE DEF
 interface Props {
@@ -33,12 +33,7 @@ const Separator: React.FC<{}> = (): JSX.Element => {
 const TradeCard: React.FC<Props> = ({data, assetPrice}): JSX.Element => {
     // CONSTANTS
     const outcome_time = helper.formatTimeStamp(data.outcome_time);
-    const total_commitment_funds = helper.numberWithCommas(data.total_commitment_funds.toFixed(2));
-
-    // HOOKS
-    useEffect(() => {
-        // console.log(assetPrice);
-    }, [assetPrice]);
+    const total_commitment_funds = helper.numberWithCommas(parseFloat(data.total_commitment_funds).toFixed(2));
 
     return (
         <div className={css(styles.wrapperContainer, globalStyles.hover)}>
@@ -116,6 +111,8 @@ const styles = StyleSheet.create({
     section3Container: {
         display: 'flex',
         flex: 0.5,
+        position: 'relative',
+        padding: '30px 0px 10px 0px',
     },
     section4Container: {
         padding: '1.5rem 2rem',

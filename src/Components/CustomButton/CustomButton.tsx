@@ -2,10 +2,10 @@ import React from 'react';
 import {StyleSheet, css, StyleDeclarationValue} from 'aphrodite/no-important';
 
 // THEME IMPORT
-import * as theme from '../Utils/theme';
+import * as theme from '../../Utils/theme';
 
 // GLOBAL STYLE IMPORT
-import globalStyles from '../Utils/globalStyle.css';
+import globalStyles from '../../Utils/globalStyle.css';
 
 // PROP TYPE DEF
 interface Props {
