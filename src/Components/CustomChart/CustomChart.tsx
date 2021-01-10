@@ -10,15 +10,17 @@ import globalStyles from '../../Utils/globalStyle.css';
 // PROP TYPE DEF
 interface BaseLineChartProps {
     values: Array<string> | null;
+    disabled?: boolean;
 }
 
 interface CustomChartProps {
     type: 'baseline' | 'area';
     values: Array<string> | null;
+    disabled?: boolean;
 }
 
 // COMPONENTS
-const BaseLineChart: React.FC<BaseLineChartProps> = ({values}): JSX.Element => {
+const BaseLineChart: React.FC<BaseLineChartProps> = ({values, disabled}): JSX.Element => {
     // STATE
     // eslint-disable-next-line
     const [viewPortDims, setViewPortDims] = useState<{height: number; width: number}>({height: 100, width: 400});
@@ -68,34 +70,48 @@ const BaseLineChart: React.FC<BaseLineChartProps> = ({values}): JSX.Element => {
                     <path strokeDasharray="5,5" d="M0 0 l0 100" />
                 </g>
                 {/* AREA STROKE */}
-                <polyline fill="none" stroke={theme.colors.ui.green} strokeWidth="2" points={points} />
+                <polyline fill="none" stroke={!disabled ? theme.colors.ui.green : '#666E79'} strokeWidth="2" points={points} />
                 {/* AREA */}
-                <path
-                    d={`M${points.replace(new RegExp(' ', 'g'), 'L').replace(new RegExp(',', 'g'), ' ')}${endPointCoords.x} ${startPointCoords.y}H0Z`}
-                    fill="url(#linear_gradient_0)"
-                />
+                {!disabled && (
+                    <path
+                        d={`M${points.replace(new RegExp(' ', 'g'), 'L').replace(new RegExp(',', 'g'), ' ')}${endPointCoords.x} ${startPointCoords.y}H0Z`}
+                        fill="url(#linear_gradient_0)"
+                    />
+                )}
                 {/* START AND END CIRCLES */}
-                <circle
-                    stroke={theme.colors.ui.green}
-                    strokeWidth="2"
-                    cx={startPointCoords.x + 2}
-                    cy={startPointCoords.y}
-                    r="2"
-                    fill={theme.colors.ui.green}></circle>
-                <circle stroke={theme.colors.ui.green} strokeWidth="2.5" cx={endPointCoords.x - 4.5} cy={endPointCoords.y + 4.5} r="4" fill={'white'}></circle>
+                {!disabled && (
+                    <React.Fragment>
+                        <circle
+                            stroke={theme.colors.ui.green}
+                            strokeWidth="2"
+                            cx={startPointCoords.x + 2}
+                            cy={startPointCoords.y}
+                            r="2"
+                            fill={theme.colors.ui.green}></circle>
+                        <circle
+                            stroke={theme.colors.ui.green}
+                            strokeWidth="2.5"
+                            cx={endPointCoords.x - 4.5}
+                            cy={endPointCoords.y + 4.5}
+                            r="4"
+                            fill={'white'}></circle>
+                    </React.Fragment>
+                )}
             </svg>
             {/* TOOLTIP */}
-            <div className={css(styles.toolTip, globalStyles.totalCenter)}>
-                <span className={css(theme.fonts.robotoMed, styles.toolTipText)}>+21.5%</span>
-            </div>
+            {!disabled && (
+                <div className={css(styles.toolTip, globalStyles.totalCenter)}>
+                    <span className={css(theme.fonts.robotoMed, styles.toolTipText)}>+21.5%</span>
+                </div>
+            )}
         </React.Fragment>
     );
 };
 
-const CustomChart: React.FC<CustomChartProps> = ({type, values}): JSX.Element => {
+const CustomChart: React.FC<CustomChartProps> = ({type, values, disabled}): JSX.Element => {
     switch (type) {
         case 'baseline':
-            return <BaseLineChart values={values} />;
+            return <BaseLineChart values={values} disabled={disabled} />;
         case 'area':
             return <></>;
         default:

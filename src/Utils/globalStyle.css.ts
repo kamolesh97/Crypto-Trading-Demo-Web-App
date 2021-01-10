@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
             cursor: 'pointer',
         },
     },
+    opacityHalf: {
+        opacity: 0.5,
+    },
 });
 
 export default styles;

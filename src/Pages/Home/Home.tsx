@@ -80,6 +80,14 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
     const [assetPrices, setAssetPrices] = useState<types.assetPrices | null>(null);
 
     // METHODS
+    const getAssetPrices = (): void => {
+        ApiCall.getAssetPrice('GET', {}, (err: any, res: {[key: string]: any}) => {
+            if (!err) {
+                setAssetPrices(res['data']);
+            }
+        });
+    };
+
     const getTrades = (): void => {
         ApiCall.getUserTrades('GET', {}, (err: any, res: {[key: string]: any}) => {
             if (!err) {
@@ -114,82 +122,8 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
     // HOOKS
     useEffect(() => {
         const socket = listenTickerPriceChanges();
+        getAssetPrices();
         getTrades();
-        // setData([
-        //     {
-        //         name: 'ETH 48 hours',
-        //         type: 'Crypto',
-        //         leverage: 2.2,
-        //         outcome_time: new Date(),
-        //         total_commitment_funds: 34346,
-        //         total_commits: 0,
-        //         ticker_name: 'eth',
-        //     },
-        //     {
-        //         name: 'ETH 48 hours',
-        //         type: 'Crypto',
-        //         leverage: 2.2,
-        //         outcome_time: new Date(),
-        //         total_commitment_funds: 340346,
-        //         total_commits: 2,
-        //         ticker_name: 'eth',
-        //     },
-        //     {
-        //         name: 'BTC 48 hours',
-        //         type: 'Crypto',
-        //         leverage: 2.2,
-        //         outcome_time: new Date(),
-        //         total_commitment_funds: 34346,
-        //         total_commits: 0,
-        //         ticker_name: 'btc',
-        //     },
-        //     {
-        //         name: 'ETH 48 hours',
-        //         type: 'Crypto',
-        //         leverage: 2.2,
-        //         outcome_time: new Date(),
-        //         total_commitment_funds: 340346,
-        //         total_commits: 2,
-        //         ticker_name: 'eth',
-        //     },
-        //     {
-        //         name: 'BTC 48 hours',
-        //         type: 'Crypto',
-        //         leverage: 2.2,
-        //         outcome_time: new Date(),
-        //         total_commitment_funds: 34346,
-        //         total_commits: 0,
-        //         ticker_name: 'btc',
-        //     },
-        //     {
-        //         name: 'ETH 48 hours',
-        //         type: 'Crypto',
-        //         leverage: 2.2,
-        //         outcome_time: new Date(),
-        //         total_commitment_funds: 340346,
-        //         total_commits: 2,
-        //         ticker_name: 'eth',
-        //     },
-        //     {
-        //         name: 'ETH 48 hours',
-        //         type: 'Crypto',
-        //         leverage: 2.2,
-        //         outcome_time: new Date(),
-        //         total_commitment_funds: 34346,
-        //         total_commits: 0,
-        //         ticker_name: 'eth',
-        //     },
-        //     {
-        //         name: 'ETH 48 hours',
-        //         type: 'Crypto',
-        //         leverage: 2.2,
-        //         outcome_time: new Date(),
-        //         total_commitment_funds: 340346,
-        //         total_commits: 2,
-        //         ticker_name: 'eth',
-        //     },
-        // ]);
-
         return () => {
             socket?.disconnect();
         };

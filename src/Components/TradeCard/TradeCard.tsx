@@ -33,7 +33,8 @@ const Separator: React.FC<{}> = (): JSX.Element => {
 const TradeCard: React.FC<Props> = ({data, assetPrice}): JSX.Element => {
     // CONSTANTS
     const outcome_time = helper.formatTimeStamp(data.outcome_time);
-    const total_commitment_funds = helper.numberWithCommas(parseFloat(data.total_commitment_funds).toFixed(2));
+    const total_commitment_funds_float = parseFloat(data.total_commitment_funds);
+    const total_commitment_funds = helper.numberWithCommas(total_commitment_funds_float.toFixed(2));
 
     return (
         <div className={css(styles.wrapperContainer, globalStyles.hover)}>
@@ -42,7 +43,9 @@ const TradeCard: React.FC<Props> = ({data, assetPrice}): JSX.Element => {
                 <div className={css(globalStyles.rowContainer, styles.section1Container)}>
                     <CustomIcon type={'star'} />
                     <div className={`pl-3 ${css(globalStyles.columnContainer)}`}>
-                        <span className={css(theme.fonts.robotoMed, styles.text1)}>{data.name}</span>
+                        <span className={css(theme.fonts.robotoMed, styles.text1, total_commitment_funds_float == 0 ? globalStyles.opacityHalf : null)}>
+                            {data.name}
+                        </span>
                         <span className={css(theme.fonts.robotoMed, styles.text2)}>{data.type}</span>
                     </div>
                 </div>
@@ -60,7 +63,7 @@ const TradeCard: React.FC<Props> = ({data, assetPrice}): JSX.Element => {
                 </div>
                 {/* SECTION 3 */}
                 <div className={css(styles.section3Container)}>
-                    <CustomChart type={'baseline'} values={assetPrice ? assetPrice['prices'] : null} />
+                    <CustomChart type={'baseline'} values={assetPrice ? assetPrice['prices'] : null} disabled={total_commitment_funds_float == 0} />
                 </div>
                 {/* SECTION 4 */}
                 <div className={css(globalStyles.columnContainer, styles.section4Container)}>
@@ -69,7 +72,9 @@ const TradeCard: React.FC<Props> = ({data, assetPrice}): JSX.Element => {
                             <span className={css(theme.fonts.robotoMonoMed, styles.text4)}>{data.total_commits}</span>
                         </div>
                     )}
-                    <span className={css(theme.fonts.robotoMonoMed, styles.text1)}>$ {total_commitment_funds}</span>
+                    <span className={css(theme.fonts.robotoMonoMed, styles.text1, total_commitment_funds_float == 0 ? globalStyles.opacityHalf : null)}>
+                        $ {total_commitment_funds}
+                    </span>
                     <span className={css(theme.fonts.robotoMed, styles.text2)}>Total commitment funds</span>
                 </div>
             </div>

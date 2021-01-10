@@ -7,7 +7,7 @@ export function getUserTrades(method: 'GET' | 'POST', body: object, cb: Function
 /*************** END USER REQUESTS ***************/
 
 /*************** TICKER REQUESTS ***************/
-export function getRecentPrice(method: 'GET' | 'POST', body: object, cb: Function) {
-    Request(`getRecentPrice`, method, body, cb);
+export function getAssetPrice(method: 'GET' | 'POST', body: object, cb: Function) {
+    Request(`ticker/getAssetPrice`, method, body, cb);
 }
 /*************** END TICKER REQUESTS ***************/
