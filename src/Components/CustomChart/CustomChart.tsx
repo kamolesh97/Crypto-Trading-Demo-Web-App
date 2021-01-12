@@ -41,7 +41,7 @@ const BaseLineChart: React.FC<BaseLineChartProps> = ({values, disabled}): JSX.El
             for (let i = 0; i < valuesInNum.length; i++) {
                 const value = valuesInNum[i];
                 const x = i * xPointDiff;
-                const y = 98 - (value - minVal) / (minMaxDiff / 100);
+                const y = 100 - (value - minVal) / (minMaxDiff / 100);
                 pointsStr += `${x},${y} `;
                 if (i === 0) {
                     setStartPointCoords({x, y});
@@ -84,17 +84,11 @@ const BaseLineChart: React.FC<BaseLineChartProps> = ({values, disabled}): JSX.El
                         <circle
                             stroke={theme.colors.ui.green}
                             strokeWidth="2"
-                            cx={startPointCoords.x + 2}
+                            cx={startPointCoords.x}
                             cy={startPointCoords.y}
                             r="2"
                             fill={theme.colors.ui.green}></circle>
-                        <circle
-                            stroke={theme.colors.ui.green}
-                            strokeWidth="2.5"
-                            cx={endPointCoords.x - 4.5}
-                            cy={endPointCoords.y + 4.5}
-                            r="4"
-                            fill={'white'}></circle>
+                        <circle stroke={theme.colors.ui.green} strokeWidth="2.5" cx={endPointCoords.x} cy={endPointCoords.y} r="4" fill={'white'}></circle>
                     </React.Fragment>
                 )}
             </svg>
@@ -125,8 +119,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         justifyContent: 'flex-end',
-        // padding: '0px 10px 0px',
-        // padding: '20px 20px 20px 0',
+        overflow: 'visible',
     },
     toolTip: {
         width: '40px',

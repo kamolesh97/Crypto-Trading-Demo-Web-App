@@ -43,13 +43,14 @@ const TradeCard: React.FC<Props> = ({data, assetPrice}): JSX.Element => {
                 <div className={css(globalStyles.rowContainer, styles.section1Container)}>
                     <CustomIcon type={'star'} />
                     <div className={`pl-3 ${css(globalStyles.columnContainer)}`}>
-                        <span className={css(theme.fonts.robotoMed, styles.text1, total_commitment_funds_float == 0 ? globalStyles.opacityHalf : null)}>
+                        <span className={css(theme.fonts.robotoMed, styles.text1, total_commitment_funds_float === 0 ? globalStyles.opacityHalf : null)}>
                             {data.name}
                         </span>
                         <span className={css(theme.fonts.robotoMed, styles.text2)}>{data.type}</span>
                     </div>
                 </div>
                 <Separator />
+
                 {/* SECTION 2 */}
                 <div className={css(styles.section2Container)}>
                     <div className={css(globalStyles.rowContainer)}>
@@ -61,10 +62,12 @@ const TradeCard: React.FC<Props> = ({data, assetPrice}): JSX.Element => {
                         {outcome_time.ss ? `${outcome_time.ss}s` : ''}
                     </span>
                 </div>
+
                 {/* SECTION 3 */}
                 <div className={css(styles.section3Container)}>
-                    <CustomChart type={'baseline'} values={assetPrice ? assetPrice['prices'] : null} disabled={total_commitment_funds_float == 0} />
+                    <CustomChart type={'baseline'} values={assetPrice ? assetPrice['prices'] : null} disabled={total_commitment_funds_float === 0} />
                 </div>
+
                 {/* SECTION 4 */}
                 <div className={css(globalStyles.columnContainer, styles.section4Container)}>
                     {data.total_commits > 0 && (
@@ -72,7 +75,7 @@ const TradeCard: React.FC<Props> = ({data, assetPrice}): JSX.Element => {
                             <span className={css(theme.fonts.robotoMonoMed, styles.text4)}>{data.total_commits}</span>
                         </div>
                     )}
-                    <span className={css(theme.fonts.robotoMonoMed, styles.text1, total_commitment_funds_float == 0 ? globalStyles.opacityHalf : null)}>
+                    <span className={css(theme.fonts.robotoMonoMed, styles.text1, total_commitment_funds_float === 0 ? globalStyles.opacityHalf : null)}>
                         $ {total_commitment_funds}
                     </span>
                     <span className={css(theme.fonts.robotoMed, styles.text2)}>Total commitment funds</span>
